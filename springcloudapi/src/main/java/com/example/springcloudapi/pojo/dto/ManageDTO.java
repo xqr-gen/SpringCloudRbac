@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class ManageDTO {
     private int uid;
-    private int pnameid;
+  //  private int pnameid;
 }
