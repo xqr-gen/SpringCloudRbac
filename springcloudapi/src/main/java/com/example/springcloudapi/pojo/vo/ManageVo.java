@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ManageVo {
     private int uid;
-    private int pnameid;
+  //  private int pnameid;
 }
