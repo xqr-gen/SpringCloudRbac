@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org//dtd/mybatis-3-mapper.dtd">
+<!-- 1.parameterType参数类型 2.resultType返回值类型    com/example/springcloudprovider/dao/Deptdao.java-->
+<mapper namespace="com.example.springcloudproviders.dao.RbacDao">
+    <select id="searchRbacId" resultType="Integer" parameterType="int">
+        select permission.pnameid from rbac.ur,rbac.rp,rbac.permission where ur.rid=rp.rid AND rp.pid=permission.pid
+        AND ur.uid=#{id}
+    </select>
+    <select id="searchRbacName" resultType="String" parameterType="int">
+        select permission.pname from rbac.ur,rbac.rp,rbac.permission where ur.rid=rp.rid AND rp.pid=permission.pid
+        AND ur.uid=#{id}
+    </select>
+    <select id="searchVersion" resultType="int" parameterType="com.example.springcloudapi.pojo.dto.UpdateUserIdentityDTO">
+        select version from rbac.ur where uid=#{updatedUserId}
+    </select>
+    <update id="updateUserIdentity" parameterType="com.example.springcloudapi.pojo.dto.UpdateUserIdentityDTO">
+        update rbac.ur
+        set rid=#{updatedRoleId},version=version+1
+        where uid=#{updatedUserId} and version = #{version}
+    </update>
+    <select id="getPwd" resultType="String" parameterType="com.example.springcloudapi.pojo.dto.LoginDTO">
+        select pwd from rbac.user where uname like concat('%',#{uname},'%')
+    </select>
+    <select id="getUid" resultType="int" parameterType="com.example.springcloudapi.pojo.dto.LoginDTO">
+        select uid from rbac.user where uname like concat('%',#{uname},'%')
+    </select>
+    <select id="getRidByUid" resultType="int" parameterType="int">
+        select rid from rbac.ur where uid=#{uid}
+    </select>
+</mapper>

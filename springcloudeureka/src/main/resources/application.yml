@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+#Eureka
+
+eureka:
+  instance:
+    hostname: eureka8080  #C:\Windows\System32\drivers\etc 的 host 文件下，  用完记得改回来
+  client:
+    register-with-eureka: false  #  是否向注册中心注册自己
+    fetch-registry: false  #  如果为false 自己是注册中心
+    service-url:   # 监控页面
+      defaultZone: http://eureka7070:7070/eureka/
+
+spring:
+  application:
+    name: SpringCloudEurekaApplication

@@ -1,0 +1,17 @@
+server:
+  port: 7070
+
+#Eureka
+
+eureka:
+  instance:
+    hostname: eureka7070
+  client:
+    register-with-eureka: false  #  是否向注册中心注册自己
+    fetch-registry: false  #  如果为false 自己是注册中心
+    service-url:   # 监控页面
+      defaultZone: http://eureka8080:8080/eureka/
+
+spring:
+  application:
+    name: SpringCloudEurekaApplication_2

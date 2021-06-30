@@ -1,0 +1,30 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: provider-xqr #  provide-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: xqr123456
+    url: jdbc:mysql://localhost:3306/rbac?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+
+mybatis:
+  type-aliases-package: com.example.springcloudapi.pojo.po
+  mapper-locations: classpath:/mybatis/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone:  http://eureka8080:8080/eureka/ ,http://eureka7070:7070/eureka/
+  instance:
+    instance-id: you-canot-know-my-url2
+
+# 由spring-boot-starter-actuator而来
+info:
+  app.name: lalala  #项目名字
+
