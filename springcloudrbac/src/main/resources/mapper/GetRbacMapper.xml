@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org//dtd/mybatis-3-mapper.dtd">
+<!-- 1.parameterType参数类型 2.resultType返回值类型    com/example/springcloudprovider/dao/Deptdao.java-->
+<mapper namespace="com.example.springcloudrbac.dao.RbacDao">
+    <select id="getRbacAll" resultType="GetPermissionDTO" >
+        select pid,pname from rbac.permission
+    </select>
+
+    <select id="getRbacByUid" resultType="GetPermissionDTO" parameterType="int">
+        select permission.pname ,permission.pid from rbac.ur,rbac.rp,rbac.permission where ur.rid=rp.rid AND rp.pid=permission.pid
+        AND ur.uid=#{id}
+    </select>
+
+    <select id="getPidByUid" resultType="Integer" parameterType="int">
+        select permission.pid from rbac.ur,rbac.rp,rbac.permission where ur.rid=rp.rid AND rp.pid=permission.pid
+        AND ur.uid=#{id}
+    </select>
+    <update id="updateUserIdentity" parameterType="UpdateUserIdentityDTO">
+        update rbac.ur
+        set rid=#{updatedRoleId},version=version+1
+        where uid=#{updatedUserId} and version = #{version}
+    </update>
+    <select id="searchVersion" resultType="Integer" parameterType="UpdateUserIdentityDTO">
+        select version from rbac.ur where uid=#{updatedUserId}
+    </select>
+    <select id="getNewRid" resultType="Integer" parameterType="AddNewRoleDTO">
+        <!--select uid from rbac.user where uname like concat('%',#{uname},'%')-->
+        select rid from rbac.role where rname like concat('%',#{newRname},'%')
+    </select>
+
+    <insert id="addNewRole" parameterType="AddNewRoleDTO">
+        insert into rbac.role(rname) values(#{newRname})
+    </insert>
+
+    <insert id="addNewRP" parameterType="InsertRPDTO">
+        insert into rbac.rp(rid,pid) values(#{rid},#{pid})
+    </insert>
+
+</mapper>
